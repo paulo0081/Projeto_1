@@ -7,7 +7,7 @@ public class main {
 		Labirinto tamanho = new Labirinto("teste.txt");
 		//text.readTxt();
 		//text.copyTxt();
-		System.out.println(tamanho.tamanho());
+		tamanho.preencheMatriz();
 	}
 
 }

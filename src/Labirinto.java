@@ -43,13 +43,48 @@ public class Labirinto {
 		return coluna;
 	}
 	
-	// comentario
-	// Temporário
 	public int tamanho(){
 		int linha = LabMatriz.length;
 		int coluna = LabMatriz[0].length;
 		return linha * coluna;
 	}
-
 	
+	public boolean preencheMatriz() {
+		char vet[];
+		int i, j, linha;
+		BufferedReader in = null;
+		try{
+			
+			in = new BufferedReader(new FileReader("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\teste.txt"));
+			String str;
+			
+			str = in.readLine();
+			linha = Integer.parseInt(str);
+			
+			for(i = 0; i < linha; i++)
+			{
+				str = in.readLine();
+				vet = new char[str.length()];
+				vet = str.toCharArray();
+				
+				for(j = 0; j < str.length(); j++)
+				{
+					this.LabMatriz[i][j] = vet[j];
+				}
+			}
+			
+			in.close();
+			
+			for(i = 0; i < linha; i++)
+			{
+				for(j = 0; j < str.length(); j++)
+				{
+					System.out.print(this.LabMatriz[i][j]);
+				}
+				System.out.print("\n");
+			}
+		}
+	catch(IOException e) {}
+		return true;
+	}
 }
