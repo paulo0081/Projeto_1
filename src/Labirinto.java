@@ -49,13 +49,12 @@ public class Labirinto {
 		return linha * coluna;
 	}
 	
-	public boolean preencheMatriz() {
-		char vet[];
+	public boolean preencheMatriz(String nomeArq) {
 		int i, j, linha;
 		BufferedReader in = null;
 		try{
 			
-			in = new BufferedReader(new FileReader("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\teste.txt"));
+			in = new BufferedReader(new FileReader("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\" + nomeArq));
 			String str;
 			
 			str = in.readLine();
@@ -64,12 +63,10 @@ public class Labirinto {
 			for(i = 0; i < linha; i++)
 			{
 				str = in.readLine();
-				vet = new char[str.length()];
-				vet = str.toCharArray();
 				
 				for(j = 0; j < str.length(); j++)
 				{
-					this.LabMatriz[i][j] = vet[j];
+					this.LabMatriz[i] = str.toCharArray();
 				}
 			}
 			
