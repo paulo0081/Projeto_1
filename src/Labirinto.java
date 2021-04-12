@@ -43,8 +43,7 @@ public class Labirinto {
 		return coluna;
 	}
 	
-	
-	
+	// comentario
 	// Temporário
 	public int tamanho(){
 		int linha = LabMatriz.length;
