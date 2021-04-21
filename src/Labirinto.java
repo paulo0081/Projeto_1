@@ -3,85 +3,72 @@ import java.io.*;
 public class Labirinto {
 	
 	private char LabMatriz[][];
+	private int linha = 0, coluna = 0;
 	
-	public Labirinto(String Arq) {
+	public Labirinto(String Arq) throws Exception{
 		
-		LabMatriz = new char[this.linha(Arq)][this.coluna(Arq)];
-	}
-	
-	public int linha(String nomeArq) {
-		int linha = 0;
-		BufferedReader in = null;
-		try{
-			
-			in = new BufferedReader(new FileReader("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\" + nomeArq));
-			String str;
-			
-			if((str = in.readLine()) != null) {
-				linha = Integer.parseInt(str);
+			this.tamanho(Arq);
+			if(this.coluna == 0) {
+				throw new Exception("Numero de colunas inválido");
 			}
-			
-			in.close();
-		}
-	catch(IOException e) {}
-		return linha;
+			LabMatriz = new char[this.linha][this.coluna];
+			this.preencheMatriz(Arq);	
 	}
 	
-	public int coluna(String nomeArq) {		// lembrar de comparar todas as linhas
-		int coluna = 0;
+	private void tamanho(String nomeArq) throws Exception {
+		
+		BufferedReader in = null;
+		int tamPadrao, contador = 0;
+	
+		in = new BufferedReader(new FileReader("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\" + nomeArq));
+		String str;
+		
+		if((str = in.readLine()) != null) {
+			this.linha = Integer.parseInt(str);
+		}
+		
+		str = in.readLine();
+		tamPadrao = str.length();
+		
+		while((str = in.readLine()) != null)
+		{
+			if (tamPadrao != str.length())
+			{
+				contador++;
+				break;
+			}
+		}
+		
+		in.close();
+		if(contador == 0)
+			this.coluna = tamPadrao;
+	}
+	
+	public void preencheMatriz(String nomeArq) {
+		int i;
 		BufferedReader in = null;
 		try{
+			
 			in = new BufferedReader(new FileReader("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\" + nomeArq));
 			String str;
 			str = in.readLine();
-			if((str = in.readLine()) != null) {
-				coluna = str.length();
-			}
-			in.close();
-		}
-	catch(IOException e) {}
-		return coluna;
-	}
-	
-	public int tamanho(){
-		int linha = LabMatriz.length;
-		int coluna = LabMatriz[0].length;
-		return linha * coluna;
-	}
-	
-	public boolean preencheMatriz(String nomeArq) {
-		int i, j, linha;
-		BufferedReader in = null;
-		try{
-			
-			in = new BufferedReader(new FileReader("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\" + nomeArq));
-			String str;
-			
-			str = in.readLine();
-			linha = Integer.parseInt(str);
-			
-			for(i = 0; i < linha; i++)
+
+			for(i = 0; i < this.linha; i++)
 			{
 				str = in.readLine();
-				
-				for(j = 0; j < str.length(); j++)
-				{
-					this.LabMatriz[i] = str.toCharArray();
-				}
+				this.LabMatriz[i] = str.toCharArray();
 			}
 			
-			in.close();
-			
-			for(i = 0; i < linha; i++)
+			/*for(i = 0; i < this.linha; i++)
 			{
-				for(j = 0; j < str.length(); j++)
-				{
-					System.out.print(this.LabMatriz[i][j]);
-				}
-				System.out.print("\n");
+				System.out.println(LabMatriz[i]);
 			}
+			in.close();*/
 		}
 	catch(IOException e) {}
-		return true;
+	}
+	
+	private void resolveMat() {
+		
 	}
 }
