@@ -58,17 +58,70 @@ public class Labirinto {
 				str = in.readLine();
 				this.LabMatriz[i] = str.toCharArray();
 			}
-			
-			/*for(i = 0; i < this.linha; i++)
-			{
-				System.out.println(LabMatriz[i]);
-			}
-			in.close();*/
 		}
 	catch(IOException e) {}
 	}
-	
-	private void resolveMat() {
+
+	public Coordenada getEntrada() throws Exception // Não está bom Malignooo, não está eficienteeee 
+	{
+		
+		try {
+			Coordenada c = null;
+			
+			for(int i = 0; i < this.linha-1; i++)
+			{
+				for(int j = 0; j < this.coluna; j++) 
+				{
+					if(this.LabMatriz[i][j] == 'E')
+					{
+						c = new Coordenada(i, j);
+					}
+				}
+			}
+			return c;
+		}catch(Exception erro)
+		{
+			throw new Exception("Entrada inexistente, sua Anta!");
+		}
+		
 		
 	}
+	
+	public int verificarArredor(int x, int y) throws Exception {
+		
+		if(x < 0 || y < 0 || (x > this.linha-1) || (x > this.coluna-1)) {
+			throw new Exception ("Valor da coordenada inválido.");
+		}
+		
+		if(this.LabMatriz[x][y] == '#' ||this.LabMatriz[x][y] == '*' || this.LabMatriz[x][y] == 'E') {
+			return 0;
+		}
+		
+		if(this.LabMatriz[x][y] == ' ') {
+			return 1;
+		}
+		
+		if(this.LabMatriz[x][y] == 'S') {
+			return 2;
+		}
+		
+		throw new Exception ("Caracter inválido.");
+		
+	}
+	
+	public int navegar (Labirinto l)
+	{
+		Navegacao n = new Navegacao(l);
+		return 0;
+	}
+	
+	public int getLinha()
+	{
+		return linha;
+	}
+	public int getColuna()
+	{
+		return coluna;
+	}
+
 }

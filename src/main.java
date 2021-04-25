@@ -1,13 +1,20 @@
 
 public class main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		// TODO Auto-generated method stub
-		//Arquivos text = new Arquivos();
-		Labirinto tamanho = new Labirinto("teste.txt");
-		//text.readTxt();
-		//text.copyTxt();
-		tamanho.preencheMatriz("teste.txt");
+		try {
+			Labirinto tamanho = new Labirinto("teste.txt");
+			//System.out.println(tamanho.toString());
+			Coordenada c = tamanho.getEntrada();
+			tamanho.navegar(tamanho);
+			System.out.println(c.toString());
+			
+		} catch(Exception erro) {
+			System.err.println(erro);
+		}
+		
+
 	}
 
 }
