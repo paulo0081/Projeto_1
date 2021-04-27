@@ -6,9 +6,8 @@ public class main {
 		try {
 			Labirinto tamanho = new Labirinto("teste.txt");
 			//System.out.println(tamanho.toString());
-			Coordenada c = tamanho.getEntrada();
-			tamanho.navegar(tamanho);
-			System.out.println(c.toString());
+			tamanho.resolverLabirinto(tamanho);
+			System.out.println(tamanho.toString());
 			
 		} catch(Exception erro) {
 			System.err.println(erro);
