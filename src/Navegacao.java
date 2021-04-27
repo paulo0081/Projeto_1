@@ -24,7 +24,7 @@ public class Navegacao {
 		
 		if(ret == 2)
 		{
-			System.out.println(ret); // temporário, será o print invertido de pilhaMaior
+			System.out.println(ret); // temporï¿½rio, serï¿½ o print invertido de pilhaMaior
 		}
 		
 		if(ret == 1)
@@ -52,6 +52,18 @@ public class Navegacao {
 		
 		this.c = pilhaMenor.recupereUmItem();
 		
+	}
+
+	public Coordenada getCoordenada() {	
+		return this.c;
+	}
+
+	public Pilha<Coordenada> getPilhaMenor() {
+		return this.pilhaMenor;
+	}
+
+	public Pilha<Pilha<Coordenada>> getPilhaMaior() {
+		return this.pilhaMaior;
 	}
 	
 	/*public void encontraEntrada(Labirinto l) throws Exception {
