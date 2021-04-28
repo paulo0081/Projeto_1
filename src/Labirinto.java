@@ -1,6 +1,7 @@
 import java.io.*;
 
-public class Labirinto {
+public class Labirinto implements Cloneable
+{
 	
 	private char LabMatriz[][];
 	private int linha = 0, coluna = 0;
@@ -24,7 +25,7 @@ public class Labirinto {
 		BufferedReader in = null;
 		int tamPadrao, contador = 0;
 	
-		in = new BufferedReader(new FileReader("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\" + nomeArq));
+		in = new BufferedReader(new FileReader(nomeArq));
 		String str;
 		
 		if((str = in.readLine()) != null) {
@@ -53,7 +54,7 @@ public class Labirinto {
 		BufferedReader in = null;
 		try{
 			
-			in = new BufferedReader(new FileReader("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\" + nomeArq));
+			in = new BufferedReader(new FileReader(nomeArq));
 			String str;
 			str = in.readLine();
 
@@ -66,9 +67,8 @@ public class Labirinto {
 	catch(IOException e) {}
 	}
 
-	private boolean validaLabirinto () throws Exception
+	public boolean validaLabirinto () throws Exception
 	    {
-	        try {
 	            int ecount = 0, scount = 0, hashcount = 0;
 
 	            for(int i = 0; i < this.linha; i++)
@@ -81,9 +81,11 @@ public class Labirinto {
 	                        ecount++;
 	                    }
 
-	                    if(this.LabMatriz[i][j] == 'S')
+	                    if(this.LabMatriz[i][j] == 'S') 
+	                    {
 	                    	saida = new Coordenada(i, j);
 	                        scount++;
+	                    }
 
 	                    if (this.LabMatriz[i][j] == '#')
 	                        hashcount++;
@@ -93,17 +95,17 @@ public class Labirinto {
 	                }
 	            }
 
-	            if ((hashcount == (((this.linha + this.coluna))*2)-6) && (ecount == 1 && scount == 1))
-	                return true;
+	            if (ecount != 1)
+                	throw new Exception("Valor de entradas inválido");
+	            
+	            if (scount != 1)
+                	throw new Exception("Valor de saidas inválido");
+	            
+	            if (hashcount != (((this.linha + this.coluna))*2)-6)
+	            	throw new Exception("Estrutura de paredes inválida");
 	            else
-	                return false;
-	        }
-	        catch(Exception erro)
-	        {
-	            throw new Exception("Entrada inexistente, sua Anta!");
-	        }
+	            	return true;
 	    }
-	
 	
 	public int verificarArredor(int x, int y) throws Exception {
 		
@@ -150,25 +152,112 @@ public class Labirinto {
 	{
 		return saida;
 	}	
+ 	
 	public Coordenada getEntrada()
     {
         return entrada;
     }
+	
 	public int getLinha()
 	{
 		return linha;
 	}
+	
 	public int getColuna()
 	{
 		return coluna;
 	}
 
+	@Override
 	public String toString() {
 		String labReescrito = String.valueOf(this.LabMatriz[0]) + "\n";
 		for(int i = 1; i < this.linha; i++) {
 			labReescrito += String.valueOf(this.LabMatriz[i]) + "\n";
 		}
 		return labReescrito;
+	}
+	
+	@Override
+	public int hashCode ()
+	{
+		int ret = 36;
+		
+		ret = 13*ret + new Integer (this.linha).hashCode();
+		ret = 13*ret + new Integer (this.coluna).hashCode();
+		
+		for (int i = 0; i < this.linha; i++)
+			for (int j = 0; j < this.coluna; j++)
+				ret = 2*ret + new Character (this.LabMatriz[i][j]).hashCode();
+		
+		ret = 11*ret + this.entrada.hashCode();
+		ret = 11*ret + this.saida.hashCode();
+		
+		return ret;
+	}
+	
+	@Override
+	public boolean equals (Object obj) 
+	{
+		if(this==obj)
+			return true;
+		
+		if(obj==null) // só estou testando o obj, porque sei que o this NUNCA é null
+            return false;
+		
+		if(this.getClass() != obj.getClass())
+			return false;
+		
+		Labirinto lab = (Labirinto) obj;
+		
+		for(int i = 0; i < this.linha; i++)
+			for(int j = 0; j < this.coluna; j++)
+				if(this.LabMatriz[i][j] != lab.LabMatriz[i][j])
+					return false;
+		
+		if(this.linha != lab.linha)
+			return false;
+		
+		if(this.coluna != lab.coluna)
+			return false;
+		
+		if(this.entrada != lab.entrada)
+			return false;
+					
+		if(this.saida != lab.saida)
+			return false;
+		
+		return true;
+	}
+	
+	public Labirinto (Labirinto modelo) throws Exception
+	{
+		if(modelo == null)
+			throw new Exception ("Modelo ausente");
+		
+		this.linha = modelo.linha;
+		this.coluna = modelo.coluna;
+		this.entrada = modelo.entrada;
+		this.saida = modelo.saida;
+		
+		this.LabMatriz = new char [modelo.linha][modelo.coluna];
+		
+		for(int i = 0; i < modelo.linha; i++)
+			for(int j = 0; j < modelo.coluna; j++)
+				this.LabMatriz[i][j] = modelo.LabMatriz[i][j];
+	}
+	
+	public Object clone ()
+	{
+		Labirinto ret = null;
+		
+		try
+		{
+			ret = new Labirinto (this);
+		}
+		catch (Exception erro)
+		{}
+		
+		return ret;
 	}
 }
 	
