@@ -1,4 +1,4 @@
-public class Pilha <X>
+public class Pilha <X> implements Cloneable
 {
     private Object[] elemento; // private X[] elemento;
     private int      tamanhoInicial;
@@ -36,7 +36,6 @@ public class Pilha <X>
         this.elemento = novo;
     }
     
-    // LIFO
     public void guardeUmItem (X x) throws Exception
     {
         if (x==null)
@@ -49,7 +48,6 @@ public class Pilha <X>
         this.elemento[this.ultimo]=x;
     }
 
-    // LIFO
     public X recupereUmItem () throws Exception
     {
         if (this.ultimo==-1)
@@ -58,7 +56,6 @@ public class Pilha <X>
         return (X)this.elemento[this.ultimo];
     }
 
-    // LIFO
     public void removaUmItem () throws Exception
     {
         if (this.ultimo==-1) // vazia
@@ -72,32 +69,16 @@ public class Pilha <X>
             this.redimensioneSe (0.5F);
     }
     
-    /*
-    public boolean isCheia ()
-    {
-        if(this.ultimo+1==this.elemento.length)
-            return true;
-
-        return false;
-    }
-    */
     public boolean isCheia ()
     {
         return this.ultimo+1==this.elemento.length;
     }
-    /*
-    public boolean isVazia ()
-    {
-        if(this.ultimo==-1)
-            return true;
 
-        return false;
-    }
-    */
     public boolean isVazia ()
     {
         return this.ultimo==-1;
     }
+    
     
     @Override
     public String toString ()
@@ -115,8 +96,6 @@ public class Pilha <X>
         return ret;
     }
     
-    // estamos aqui para comparar o this, QUE SEI QUE É UMA PILHA<X>,
-    // com o obj, QUE NÃO SEI O QUE É
     @Override
     public boolean equals (Object obj)
     {
@@ -147,17 +126,61 @@ public class Pilha <X>
     @Override
     public int hashCode ()
     {
-        int ret=666/*qualquer positivo*/;
+        int ret=12;
 
         ret = ret*7/*primo*/ + new Integer(this.ultimo        ).hashCode();
-        ret = ret*7/*primo*/ + new Integer(this.tamanhoInicial).hashCode();
+        ret = ret*5/*primo*/ + new Integer(this.tamanhoInicial).hashCode();
 
         for (int i=0; i<=this.ultimo; i++)
-            ret = ret*7/*primo*/ + this.elemento[i].hashCode();
+            ret = ret*3/*primo*/ + this.elemento[i].hashCode();
 
         if (ret<0)
             ret=-ret;
 
         return ret;
+    }
+    
+    public Pilha (Pilha<X> modelo) throws Exception 
+    {
+    	if(modelo == null)
+    		throw new Exception("Modelo inexistente.");
+    		
+		this.elemento = new Object[modelo.getQuantidade()];
+		this.tamanhoInicial = modelo.getQuantidade();
+		this.ultimo = -1;
+		
+		Pilha<X> pilhaAuxiliar = new Pilha<X>(modelo.getQuantidade());
+		
+		while(!modelo.isVazia()) {
+			pilhaAuxiliar.guardeUmItem(modelo.recupereUmItem());
+			modelo.removaUmItem();
+		}
+		
+		while(!pilhaAuxiliar.isVazia()) {
+			modelo.guardeUmItem(pilhaAuxiliar.recupereUmItem());
+			this.guardeUmItem(pilhaAuxiliar.recupereUmItem());
+			pilhaAuxiliar.removaUmItem();
+		}
+    }
+    
+    public Object clone()
+    {
+    	
+    	Pilha<X> ret = null;
+    	try {
+    		ret = new Pilha<X>(this);
+    	}
+    	catch(Exception erro) {}
+    	
+    	return ret;
+    }
+    
+    public int compareTo(Pilha<X> pilha) 
+    {
+    	if(this.getQuantidade() < pilha.getQuantidade())
+    		return -1;
+    	if(this.getQuantidade() < pilha.getQuantidade())
+    		return 1;
+    	return 0;
     }
 }

@@ -18,6 +18,7 @@ public class Coordenada {
 		return coordY;
 	}
 	
+	
 	@Override
 	public String toString()
 	{
@@ -62,6 +63,36 @@ public class Coordenada {
 
         return hashedX + hashedY;
     }
+	
+	public Coordenada (Coordenada modelo){
+
+        this.coordX = modelo.coordX;
+        this.coordY = modelo.coordY;
+
+    }
+
+    public Object clone () {
+
+        Coordenada aux = null;
+        try {
+            aux = new Coordenada(this);
+        }
+        catch (Exception error)
+        {
+
+        }
+
+        return aux;
+    }
+
+    public int compareTo (Coordenada coordenada){
+
+        if(this.coordX < coordenada.coordX) return -1;
+        if(this.coordY < coordenada.coordY) return -2;
+        return 0;
+    }
+	
+	
 	
 	
 }

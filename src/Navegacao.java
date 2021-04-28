@@ -1,19 +1,20 @@
 
-public class Navegacao {
+public class Navegacao implements Cloneable
+{
 	
 		Coordenada c;
 		Pilha<Coordenada> pilhaMenor;
 		Pilha<Pilha<Coordenada>> pilhaMaior;
 		
 		
-	public Navegacao(Labirinto l) {
+	public Navegacao(Labirinto l) throws Exception {
 		try {
 			this.c = l.getEntrada();
 			this.pilhaMenor = new Pilha<Coordenada>(3);
 			this.pilhaMaior = new Pilha<Pilha<Coordenada>>(l.getLinha()*l.getColuna());
 			
 		}catch(Exception erro) {
-			System.out.println(erro);
+			throw (erro);
 		}
 		
 	}
@@ -64,7 +65,6 @@ public class Navegacao {
 	}
 	
 	private void retroceder(Labirinto l) throws Exception {
-		l.modificarCaminho(c, 1);
 		if(this.pilhaMaior.isVazia()){
 			throw new Exception ("Saída não encontrada");
 		} 
@@ -98,7 +98,7 @@ public class Navegacao {
 			imprimeLabirinto();
 			
 		}catch(Exception erro){
-			throw new Exception (erro);
+			throw (erro);
 		}
 	}
 	
@@ -122,4 +122,6 @@ public class Navegacao {
 		}
 		
 	}
+
+	
 }
