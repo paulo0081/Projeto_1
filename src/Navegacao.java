@@ -27,7 +27,7 @@ public class Navegacao implements Cloneable
 			ret = l.verificarArredor(x, y);
 			
 			if(ret == 1) {
-				return 1; // temporário, será o print invertido de pilhaMaior
+				return 1; // temporï¿½rio, serï¿½ o print invertido de pilhaMaior
 			}
 			
 			if(ret == 2) {
@@ -66,7 +66,7 @@ public class Navegacao implements Cloneable
 	
 	private void retroceder(Labirinto l) throws Exception {
 		if(this.pilhaMaior.isVazia()){
-			throw new Exception ("Saída não encontrada");
+			throw new Exception ("Saï¿½da nï¿½o encontrada");
 		} 
 		
 		else {
@@ -90,7 +90,50 @@ public class Navegacao implements Cloneable
 			}
 		}
 	}
+
+	public boolean equals(Labirinto lab) {
+		if(this.c == lab.getEntrada())
+			return true;
+		
+		if(lab == null)
+			return false;
 	
+		return true;
+	}
+
+	public int hashCode() {
+		Integer hashStart = Integer.valueOf(100);
+
+		hashStart = hashStart.hashCode() * hashStart;
+
+
+		if(hashStart < 0) {
+			hashStart = -hashStart;
+		}
+
+		return hashStart;
+	}
+
+	public int compareTo(Labirinto lab) {
+
+		if(this.c != lab.getEntrada()) return -1;
+
+		return 0;
+	}
+	
+	public Labirinto clone() {
+
+		Labirinto aux = null;
+
+		try { 
+			aux = new Labirinto(aux);
+		} catch(Exception error) {
+			throw new Error();
+		}
+
+		return aux;
+	}
+
 	public void navegarLabirinto(Labirinto l) throws Exception {
 		try {
 			
