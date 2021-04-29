@@ -11,13 +11,23 @@ public class Labirinto implements Cloneable
 		try {
 			if(Arq == null || Arq == "")
 				throw new Exception("Arquivo não encontrado");
+			
 			this.defineTamanho(Arq);
-			if(this.coluna == 0) {
+			
+			if(this.linha <= 0) {
+				throw new Exception("Numero de linhas inválido");
+			}
+			
+			if(this.coluna <= 0) {
 				throw new Exception("Numero de colunas inválido");
 			}
+			
 			LabMatriz = new char[this.linha][this.coluna];
+			
 			this.preencheMatriz(Arq);
+			
 			validaLabirinto();
+			
 		}catch(Exception erro) {
 			throw (erro);
 		}
@@ -50,9 +60,12 @@ public class Labirinto implements Cloneable
 		in.close();
 		if(contador == 0)
 			this.coluna = tamPadrao;
+		else {
+			throw new Exception("Tamanho das colunas não é igual.");
+		}
 	}
 	
-	public void preencheMatriz(String nomeArq) {
+	private void preencheMatriz(String nomeArq) {
 		int i;
 		BufferedReader in = null;
 		try{
@@ -124,18 +137,6 @@ public class Labirinto implements Cloneable
 		
 		return 0;
 		
-	}
-		
-	public int resolverLabirinto (Labirinto l) throws Exception
-	{
-		try {
-			Navegacao n = new Navegacao(l);
-			n.navegarLabirinto(l);
-		}catch(Exception erro) {
-			throw (erro);
-		}
-		
-		return 0;
 	}
 	
 	public void modificarCaminho (Coordenada c, int tipo) {

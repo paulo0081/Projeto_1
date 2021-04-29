@@ -4,7 +4,7 @@ public class Pilha <X> implements Cloneable
     private int      tamanhoInicial;
     private int      ultimo = -1; // vazia
     
-    // construtor padrao, pois nao tem parametros
+    
     public Pilha ()
     {
         this.elemento       = new Object [10]; // this.elemento = new X [10];
@@ -102,7 +102,7 @@ public class Pilha <X> implements Cloneable
         if(this==obj)
             return true;
 
-        if(obj==null) // só estou testando o obj, porque sei que o this NUNCA é null
+        if(obj==null) 
             return false;
 
         if(this.getClass()!=obj.getClass())
@@ -146,7 +146,7 @@ public class Pilha <X> implements Cloneable
     		throw new Exception("Modelo inexistente.");
     		
 		this.elemento = new Object[modelo.getQuantidade()];
-		this.tamanhoInicial = modelo.getQuantidade();
+		this.tamanhoInicial = modelo.tamanhoInicial;
 		this.ultimo = -1;
 		
 		Pilha<X> pilhaAuxiliar = new Pilha<X>(modelo.getQuantidade());

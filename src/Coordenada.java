@@ -91,8 +91,4 @@ public class Coordenada {
         if(this.coordY < coordenada.coordY) return -2;
         return 0;
     }
-	
-	
-	
-	
 }

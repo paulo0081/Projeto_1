@@ -10,10 +10,11 @@ public class Main {
 		String arquivo = s.nextLine();
 		
 		try {
-			Labirinto tamanho = new Labirinto(arquivo);
-			//System.out.println(tamanho.toString());
-			tamanho.resolverLabirinto(tamanho);
-			System.out.println(tamanho.toString());
+			Labirinto lab = new Labirinto(arquivo);
+			Navegacao nav = new Navegacao(lab);
+			
+			System.out.println(nav.toString());
+			System.out.println(lab.toString());
 			
 		} catch(Exception erro) {
 			System.err.println(erro);
