@@ -169,6 +169,8 @@ public class Labirinto implements Cloneable
 		return coluna;
 	}
 
+	
+	
 	@Override
 	public String toString() {
 		String labReescrito = String.valueOf(this.LabMatriz[0]) + "\n";

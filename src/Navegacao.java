@@ -110,7 +110,7 @@ public class Navegacao implements Cloneable
 				this.pilhaMenor = pilhaMaiorAuxiliar.recupereUmItem();
 				pilhaMaiorAuxiliar.removaUmItem();
 				this.c = this.pilhaMenor.recupereUmItem();
-				caminho = c.toString() + "\n";
+				caminho += c.toString() + "\n";
 			}
 			
 			
