@@ -7,6 +7,11 @@ public class Labirinto implements Cloneable
 	private int linha = 0, coluna = 0;
 	private Coordenada entrada, saida;
 	
+	/**
+	 * Constroi o Labirinto, definindo o tamanho dele e 
+	 * @param Arq - É o nome do arquivo que deve ser lido. (Deve ser escrito o ".txt" após o nome) 
+	 * @throws Exception
+	 */
 	public Labirinto(String Arq) throws Exception{
 		try {
 			if(Arq == null || Arq == "")
@@ -83,7 +88,7 @@ public class Labirinto implements Cloneable
 	catch(IOException e) {}
 	}
 
-	public void validaLabirinto () throws Exception
+	private void validaLabirinto () throws Exception
 	    {
 	            int ecount = 0, scount = 0, hashcount = 0;
 

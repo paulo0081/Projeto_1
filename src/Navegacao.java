@@ -79,7 +79,6 @@ public class Navegacao implements Cloneable
 				retroceder(l);
 			}
 			else {
-				
 				this.c = this.pilhaMenor.recupereUmItem();
 				l.modificarCaminho(c, 1);
 				this.pilhaMenor.removaUmItem();
