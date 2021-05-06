@@ -36,13 +36,15 @@ public class Pilha <X> implements Cloneable
         this.elemento = novo;
     }
     
-    public void guardeUmItem (X x) throws Exception
+   public void guardeUmItem (X x) throws Exception
     {
-        if (x==null)
+        if (x==null){
             throw new Exception ("Valor ausente");
-        
-        if (this.ultimo+1==this.elemento.length) // cheia
-            this.redimensioneSe (2.0F);
+        }
+
+        if (this.ultimo-1==this.elemento.length) {
+            throw new Exception("Pilha cheia");
+        }// cheia
             
         this.ultimo++;
         this.elemento[this.ultimo]=x;
