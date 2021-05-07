@@ -20,6 +20,14 @@ public class Navegacao implements Cloneable
 		
 	}
 	
+	
+	/** 
+	 * @param x
+	 * @param y
+	 * @param l
+	 * @return int
+	 * @throws Exception
+	 */
 	private int validaArredor(int x, int y, Labirinto l) throws Exception {
 		int ret;
 		
@@ -38,6 +46,11 @@ public class Navegacao implements Cloneable
 		return 0;
 	}
 	
+	
+	/** 
+	 * @param l
+	 * @throws Exception
+	 */
 	private void prosseguir(Labirinto l) throws Exception {
 		int resposta = 0;
 		
@@ -64,9 +77,14 @@ public class Navegacao implements Cloneable
 		}
 	}
 	
+	
+	/** 
+	 * @param l
+	 * @throws Exception
+	 */
 	private void retroceder(Labirinto l) throws Exception {
 		if(this.pilhaMaior.isVazia()){
-			throw new Exception ("Saída não encontrada");
+			throw new Exception ("Saï¿½da nï¿½o encontrada");
 		} 
 		
 		else {
@@ -92,6 +110,10 @@ public class Navegacao implements Cloneable
 	
 
 	
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		
@@ -118,6 +140,11 @@ public class Navegacao implements Cloneable
 		return caminho;
 	}
 
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if(this==obj)
@@ -143,6 +170,10 @@ public class Navegacao implements Cloneable
 		return true;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode() {
 		
@@ -157,6 +188,11 @@ public class Navegacao implements Cloneable
 		
 	}
 
+	
+	/** 
+	 * @param nav
+	 * @return int
+	 */
 	public int compareTo(Navegacao nav) {
 
 		if(this.pilhaMenor.getQuantidade() > nav.pilhaMenor.getQuantidade()) return  1;
@@ -174,6 +210,10 @@ public class Navegacao implements Cloneable
 		this.pilhaMenor = nav.pilhaMenor;
 	}
 	
+	
+	/** 
+	 * @return Navegacao
+	 */
 	public Navegacao clone(){
 
 		Navegacao aux = null;

@@ -75,12 +75,16 @@ public class Janela {
 		}
     }
     
+    /** 
+     * @return void
+     * @metodo Salva o arquivo com o nome escolhido pelo usuário
+     */
     private class SalvarLab implements ActionListener {
       public void actionPerformed(ActionEvent e) {
         String lab = textArea.getText();
 
         fc.setDialogTitle("Salvar Labirinto");
-        
+
         fc.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter extFilter = new FileNameExtensionFilter(".txt File", "txt");
         fc.addChoosableFileFilter(extFilter);

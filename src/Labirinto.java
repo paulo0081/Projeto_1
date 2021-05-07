@@ -9,22 +9,22 @@ public class Labirinto implements Cloneable
 	
 	/**
 	 * Constroi o Labirinto, definindo o tamanho dele e 
-	 * @param Arq - É o nome do arquivo que deve ser lido. (Deve ser escrito o ".txt" após o nome) 
+	 * @param Arq - ï¿½ o nome do arquivo que deve ser lido. (Deve ser escrito o ".txt" apï¿½s o nome) 
 	 * @throws Exception
 	 */
 	public Labirinto(String Arq) throws Exception{
 		try {
 			if(Arq == null || Arq == "")
-				throw new Exception("Arquivo não encontrado");
+				throw new Exception("Arquivo nï¿½o encontrado");
 			
 			this.defineTamanho(Arq);
 			
 			if(this.linha <= 0) {
-				throw new Exception("Numero de linhas inválido");
+				throw new Exception("Numero de linhas invï¿½lido");
 			}
 			
 			if(this.coluna <= 0) {
-				throw new Exception("Numero de colunas inválido");
+				throw new Exception("Numero de colunas invï¿½lido");
 			}
 			
 			LabMatriz = new char[this.linha][this.coluna];
@@ -38,6 +38,11 @@ public class Labirinto implements Cloneable
 		}
 	}
 	
+	
+	/** 
+	 * @param nomeArq
+	 * @throws Exception
+	 */
 	private void defineTamanho(String nomeArq) throws Exception {
 		
 		BufferedReader in = null;
@@ -66,10 +71,14 @@ public class Labirinto implements Cloneable
 		if(contador == 0)
 			this.coluna = tamPadrao;
 		else {
-			throw new Exception("Tamanho das colunas não é igual.");
+			throw new Exception("Tamanho das colunas nï¿½o ï¿½ igual.");
 		}
 	}
 	
+	
+	/** 
+	 * @param nomeArq
+	 */
 	private void preencheMatriz(String nomeArq) {
 		int i;
 		BufferedReader in = null;
@@ -88,6 +97,10 @@ public class Labirinto implements Cloneable
 	catch(IOException e) {}
 	}
 
+	
+	/** 
+	 * @throws Exception
+	 */
 	private void validaLabirinto () throws Exception
 	    {
 	            int ecount = 0, scount = 0, hashcount = 0;
@@ -117,15 +130,22 @@ public class Labirinto implements Cloneable
 	            }
 
 	            if (ecount != 1)
-                	throw new Exception("Valor de entradas inválido");
+                	throw new Exception("Valor de entradas invï¿½lido");
 	            
 	            if (scount != 1)
-                	throw new Exception("Valor de saidas inválido");
+                	throw new Exception("Valor de saidas invï¿½lido");
 	            
 	            if (hashcount != (((this.linha + this.coluna))*2)-6)
-	            	throw new Exception("Estrutura de paredes inválida");
+	            	throw new Exception("Estrutura de paredes invï¿½lida");
 	    }
 	
+	
+	/** 
+	 * @param x
+	 * @param y
+	 * @return int
+	 * @throws Exception
+	 */
 	public int verificarArredor(int x, int y) throws Exception {
 		
 		if(this.LabMatriz[x][y] == ' ') {
@@ -137,13 +157,18 @@ public class Labirinto implements Cloneable
 		}
 		
 		if(this.LabMatriz[x][y] != '#' && this.LabMatriz[x][y] != '*' && this.LabMatriz[x][y] != 'E') {
-			throw new Exception ("Caracter inválido.");
+			throw new Exception ("Caracter invï¿½lido.");
 		}
 		
 		return 0;
 		
 	}
 	
+	
+	/** 
+	 * @param c
+	 * @param tipo
+	 */
 	public void modificarCaminho (Coordenada c, int tipo) {
 		if(this.LabMatriz[c.getX()][c.getY()] == ' ' && tipo == 0) {
 			this.LabMatriz[c.getX()][c.getY()] = '*';
@@ -154,21 +179,37 @@ public class Labirinto implements Cloneable
 		}
 	}
 	
- 	public Coordenada getSaida()
+ 	
+	 /** 
+	  * @return Coordenada
+	  */
+	 public Coordenada getSaida()
 	{
 		return saida;
 	}	
  	
+	
+	/** 
+	 * @return Coordenada
+	 */
 	public Coordenada getEntrada()
     {
         return entrada;
     }
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getLinha()
 	{
 		return linha;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getColuna()
 	{
 		return coluna;
@@ -176,6 +217,10 @@ public class Labirinto implements Cloneable
 
 	
 	
+	
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		String labReescrito = String.valueOf(this.LabMatriz[0]) + "\n";
@@ -185,6 +230,10 @@ public class Labirinto implements Cloneable
 		return labReescrito;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int hashCode ()
 	{
@@ -203,13 +252,18 @@ public class Labirinto implements Cloneable
 		return ret;
 	}
 	
+	
+	/** 
+	 * @param obj
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals (Object obj) 
 	{
 		if(this==obj)
 			return true;
 		
-		if(obj==null) // só estou testando o obj, porque sei que o this NUNCA é null
+		if(obj==null) // sï¿½ estou testando o obj, porque sei que o this NUNCA ï¿½ null
             return false;
 		
 		if(this.getClass() != obj.getClass())
@@ -254,6 +308,10 @@ public class Labirinto implements Cloneable
 				this.LabMatriz[i][j] = modelo.LabMatriz[i][j];
 	}
 	
+	
+	/** 
+	 * @return Object
+	 */
 	public Object clone ()
 	{
 		Labirinto ret = null;

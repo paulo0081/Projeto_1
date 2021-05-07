@@ -20,11 +20,19 @@ public class Pilha <X> implements Cloneable
         this.tamanhoInicial = tamanho;
     }
     
+    
+    /** 
+     * @return int
+     */
     public int getQuantidade ()
     {
         return this.ultimo+1;
     }
     
+    
+    /** 
+     * @param fator
+     */
     private void redimensioneSe (float fator)
     {
         // X[] novo = new X [Math.round(this.elemento.length*fator)];
@@ -36,6 +44,11 @@ public class Pilha <X> implements Cloneable
         this.elemento = novo;
     }
     
+    
+    /** 
+     * @param x
+     * @throws Exception
+     */
     public void guardeUmItem (X x) throws Exception
     {
         if (x==null)
@@ -48,6 +61,11 @@ public class Pilha <X> implements Cloneable
         this.elemento[this.ultimo]=x;
     }
 
+    
+    /** 
+     * @return X
+     * @throws Exception
+     */
     public X recupereUmItem () throws Exception
     {
         if (this.ultimo==-1)
@@ -56,6 +74,10 @@ public class Pilha <X> implements Cloneable
         return (X)this.elemento[this.ultimo];
     }
 
+    
+    /** 
+     * @throws Exception
+     */
     public void removaUmItem () throws Exception
     {
         if (this.ultimo==-1) // vazia
@@ -69,11 +91,19 @@ public class Pilha <X> implements Cloneable
             this.redimensioneSe (0.5F);
     }
     
+    
+    /** 
+     * @return boolean
+     */
     public boolean isCheia ()
     {
         return this.ultimo+1==this.elemento.length;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean isVazia ()
     {
         return this.ultimo==-1;
@@ -81,6 +111,10 @@ public class Pilha <X> implements Cloneable
     
     
     
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString ()
     {
@@ -97,6 +131,11 @@ public class Pilha <X> implements Cloneable
         return ret;
     }
     
+    
+    /** 
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean equals (Object obj)
     {
@@ -124,6 +163,11 @@ public class Pilha <X> implements Cloneable
         return true;
     }
 
+    
+    /** 
+     * @return int
+     * 
+     */
     @Override
     public int hashCode ()
     {
@@ -164,6 +208,10 @@ public class Pilha <X> implements Cloneable
 		}
     }
     
+    
+    /** 
+     * @return Object
+     */
     public Object clone()
     {
     	
@@ -176,6 +224,11 @@ public class Pilha <X> implements Cloneable
     	return ret;
     }
     
+    
+    /** 
+     * @param pilha
+     * @return int
+     */
     public int compareTo(Pilha<X> pilha) 
     {
     	if(this.getQuantidade() < pilha.getQuantidade())
