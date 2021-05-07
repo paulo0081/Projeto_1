@@ -6,7 +6,7 @@ public class Main {
 		// TODO Auto-generated method stub
 		
 		Scanner s = new Scanner(System.in);
-		System.out.println("Favor digitar o nome do labirinto que será resolvido. ");
+		System.out.println("Favor digitar o nome do labirinto que serï¿½ resolvido. ");
 		//String arquivo = s.nextLine();
 		
 		try {
