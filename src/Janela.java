@@ -11,22 +11,26 @@ import java.io.*;
 public class Janela{
 	private JFrame  janela     = new JFrame  ("Labirinto");
     private JLabel  visor      = new JLabel  ("Inicio, aqui ficará o log de Erros", JLabel.LEFT);
-    private JButton botao []   = new JButton [4];
+    private JButton botao []   = new JButton [6];
     private JTextArea textArea = new JTextArea("Bem vindo!\n");
     private Labirinto controle = null;
     private JFileChooser fc    = new JFileChooser();
+    
     
     
     public Janela()
     {
     	
     	JPanel botoes = new JPanel();
-        botoes.setLayout (new GridLayout(1,4));
+        botoes.setLayout (new GridLayout(2,3));
 
-        String texto [] = {	"Criar um novo arquivo de labirinto",
-        					"Abrir  um  arquivo  de  labirinto  para  edição", 
-        					"Salvar  arquivo  de  labirinto", 
-        					"Executar arquivo  de  labirinto"};
+        String texto [] = {	"Criar um novo arquivo de labirinto", 
+        					"Executar arquivo  de  labirinto",
+        					"Limpar o labirinto",
+        					"Abrir  um  arquivo  de  labirinto  para  edição",
+        					"Salvar  arquivo  de  labirinto",
+        					"Regras para criar um labirinto",
+        					};
 
         for (int i=0; i<this.botao.length; i++)
         {
@@ -57,23 +61,27 @@ public class Janela{
         
         
         this.botao[0].addActionListener(new  CriarLab ());
-        this.botao[1].addActionListener(new  AbrirLab ());
-        this.botao[2].addActionListener(new SalvarLab ());
-        this.botao[3].addActionListener(new   ExecLab ());
+        this.botao[1].addActionListener(new   ExecLab ());
+        this.botao[2].addActionListener(new LimparLab ());
+        this.botao[3].addActionListener(new  AbrirLab ());
+        this.botao[4].addActionListener(new SalvarLab ());
+        this.botao[5].addActionListener(new RegrasLab ());
     }
     
-    private class CriarLab implements ActionListener
+    private class CriarLab  implements ActionListener
     {
 		public void actionPerformed(ActionEvent e) {
+			controle = null;
 			textArea.setText("");
 			textArea.setEditable(true);
 		}
     }
     
-    private class AbrirLab implements ActionListener
+    private class AbrirLab  implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
         {
+        	textArea.setEditable(true);
             String labCam = "", lab="";
             File fi=null;
             Arquivos aux = new Arquivos();
@@ -87,7 +95,6 @@ public class Janela{
             if(result == JFileChooser.APPROVE_OPTION) 
             {
                 fi = fc.getSelectedFile();
-                //System.out.println(fi);
                 labCam = fi.toString();
                 lab = aux.openTxt(labCam);
                 textArea.setText(lab);
@@ -109,7 +116,6 @@ public class Janela{
 
             int linha = textArea.getLineCount();
 
-            System.out.println(linha);
             try { 
 	            fc.setDialogTitle("Salvar Labirinto");
 	            fc.setAcceptAllFileFilterUsed(false);
@@ -140,11 +146,9 @@ public class Janela{
     	} 
     }
     
-    private class ExecLab implements ActionListener
+    private class ExecLab   implements ActionListener
     {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(textArea.getLineCount());
-			System.out.println(textArea.getText());
 			try {
 				Labirinto labir = new Labirinto(textArea.getText(), textArea.getLineCount());
 				controle = (Labirinto) labir.clone();
@@ -161,5 +165,29 @@ public class Janela{
 			}
 		}
 		//.getLineCount
+    }
+    
+    private class RegrasLab implements ActionListener
+    {
+    	public void actionPerformed(ActionEvent e) {
+    		textArea.setText("Oba!");
+    		textArea.setEditable(false);
+    	}
+    }
+    
+    private class LimparLab implements ActionListener
+    {
+    	public void actionPerformed(ActionEvent e) {
+    		try {
+    			if(controle == null)
+    				throw new Exception("Labirinto não pode ser encontrado.");
+    			textArea.setText(controle.toString());
+    			
+    		}catch(Exception e1) {
+    			String texto = e1.toString();
+				visor.setForeground(Color.red);
+				visor.setText(texto);
+    		}
+    	}
     }
 }
