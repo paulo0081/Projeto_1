@@ -164,6 +164,11 @@ public class Navegacao implements Cloneable
 		return 0;
 	}
 	
+	/**
+	 * Construtor com a função de fazer uma deep copy da Navegação. 
+	 * 
+	 * @param coordenada: se refere ao objeto a ser clonado.
+     */
 	public Navegacao (Navegacao nav) throws Exception {
 		
 		if(nav == null)
@@ -174,6 +179,7 @@ public class Navegacao implements Cloneable
 		this.pilhaMenor = nav.pilhaMenor;
 	}
 	
+	@Override
 	public Navegacao clone(){
 
 		Navegacao aux = null;

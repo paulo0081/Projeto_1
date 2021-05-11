@@ -228,7 +228,8 @@ public class Labirinto implements Cloneable
  	
 	public Coordenada getEntrada()
     {
-        return entrada;
+		Coordenada e = (Coordenada)entrada.clone();
+        return e;
     }
 	
 	public int getLinha()

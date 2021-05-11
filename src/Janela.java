@@ -29,8 +29,7 @@ public class Janela{
         					"Limpar o labirinto",
         					"Abrir  um  arquivo  de  labirinto  para  edição",
         					"Salvar  arquivo  de  labirinto",
-        					"Regras para criar um labirinto",
-        					};
+        					"Regras para criar um labirinto"};
 
         for (int i=0; i<this.botao.length; i++)
         {
@@ -44,7 +43,6 @@ public class Janela{
         this.textArea.setSize(510, 300);
         this.textArea.setEditable(false);
         
-
         this.visor.setPreferredSize(new Dimension(250, 100));
         this.visor.setVerticalAlignment(SwingConstants.TOP);
         
@@ -104,7 +102,9 @@ public class Janela{
                 fw.read();
                 fw.close();
             } catch(Exception e2) {
-                JOptionPane.showMessageDialog(null, e2.getMessage());
+            	String texto = e2.toString();
+				visor.setForeground(Color.red);
+				visor.setText(texto);
             }
         }
     }
@@ -140,7 +140,9 @@ public class Janela{
 	             }
             
 	         } catch(Exception e2) {
-	            	 JOptionPane.showMessageDialog(null, e2.getMessage());
+	        	 	String texto = e2.toString();
+					visor.setForeground(Color.red);
+					visor.setText(texto);
 	         }      
             
     	} 
@@ -170,7 +172,16 @@ public class Janela{
     private class RegrasLab implements ActionListener
     {
     	public void actionPerformed(ActionEvent e) {
-    		textArea.setText("Oba!");
+    		textArea.setText("Regras para a criação de um labirinto:\r\n" + 
+    						 "\r\n" + 
+    						 "1. É necessário que haja APENAS uma entrada e uma saída, demarcadas como \"E\" e \"S\", respectivamente.\r\n" + 
+    						 "2. É necessário que a estrutura de \"paredes\" esteja completa com o perímetro do labirinto preenchido com \"#\".\r\n" + 
+    						 "3. É necessário que haja um caminho possível entre a entrada e a saída.\r\n" + 
+    						 "4. É necessário que a entrada e a saída estejam presenter exclusivamente no perímetro do labirinto. \r\n" + 
+    						 "5. É necessário que TODAS as linhas possuam o mesmo tamanho.\r\n" + 
+    						 "6. O caminho deve ser demarcado com \" \".\r\n" + 
+    						 "\r\n" + 
+    						 "Obs: ao finalizar, certifique-se que não há quebras de linha.");
     		textArea.setEditable(false);
     	}
     }

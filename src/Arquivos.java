@@ -15,7 +15,11 @@ public class Arquivos {
 	catch(IOException e) {}
 	}
 	
-	
+	/**
+	 * Retorna uma String contendo o  conteúdo do arquivo .txt passado. 
+     * @param arq - nome do arquivo que será lido no método.
+     * @return String
+     */
 	public String openTxt(String arq) 
     {
             BufferedReader in = null;
