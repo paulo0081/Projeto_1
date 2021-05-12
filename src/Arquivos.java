@@ -15,23 +15,39 @@ public class Arquivos {
 	catch(IOException e) {}
 	}
 	
-	
-	public void copyTxt() {
-		BufferedReader in = null;
-		BufferedWriter out = null;
-		try{
-			in = new BufferedReader(new FileReader("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\teste.txt"));
-			out = new BufferedWriter(new FileWriter("C:\\Users\\paulo\\eclipse-workspace\\Projeto_1\\teste2.txt"));
-			String str;
-			while((str = in.readLine()) != null) {
-				out.write(str);
-				out.write("\n");
-			}
-			in.close();
-			out.close();
-		} 
-		catch(IOException e) {
-			
-		}
-	}
+	/**
+	 * Retorna uma String contendo o  conteúdo do arquivo .txt passado. 
+     * @param arq - nome do arquivo que será lido no método.
+     * @return String
+     */
+	public String openTxt(String arq) 
+    {
+            BufferedReader in = null;
+            String ret = "";
+            boolean numFlag = true;
+
+            try
+            {
+                in = new BufferedReader(new FileReader(arq));
+                int tamanho;
+                String str;
+                while((str = in.readLine()) != null) 
+                {
+                    if (numFlag == true)
+                    {
+                        str = in.readLine();
+                        numFlag = false;
+                    }
+                    ret += str + "\n";
+                }
+                in.close();
+                tamanho = ret.length();
+                ret = ret.substring(0, tamanho-1);
+            }
+        catch(IOException e) 
+            {
+
+            }
+            return ret;
+    }
 }

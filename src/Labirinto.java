@@ -7,6 +7,7 @@ public class Labirinto implements Cloneable
 	private int linha = 0, coluna = 0;
 	private Coordenada entrada, saida;
 	
+
 	public Labirinto(String Arq) throws Exception{
 		try {
 			if(Arq == null || Arq == "")
@@ -28,10 +29,36 @@ public class Labirinto implements Cloneable
 			
 			validaLabirinto();
 			
+			
+			
 		}catch(Exception erro) {
 			throw (erro);
 		}
 	}
+	
+	public Labirinto(String Lab, int linhas) throws Exception{
+		try {
+			
+			this.defineTamanho(Lab, linhas);
+			
+			if(this.linha <= 0) {
+				throw new Exception("Numero de linhas inválido");
+			}
+			
+			if(this.coluna <= 0) {
+				throw new Exception("Numero de colunas inválido");
+			}
+			
+			LabMatriz = new char[this.linha][this.coluna];
+			
+			this.preencheMatriz(Lab, linha);
+			validaLabirinto();
+			
+		}catch(Exception erro) {
+			throw(erro);
+		}
+	}
+	
 	
 	private void defineTamanho(String nomeArq) throws Exception {
 		
@@ -65,6 +92,50 @@ public class Labirinto implements Cloneable
 		}
 	}
 	
+	private void defineTamanho(String lab, int linhas) throws Exception {
+
+		int tamPadrao, contador = 0, linhaAtual = 0;
+		
+		String str[] = new String [linhas];
+		this.linha = linhas;
+		
+		tamPadrao = lab.length();
+		str = lab.split("\n");
+		tamPadrao = str[0].length();
+		
+		while(/*str[linhaAtual] != null ||*/ linhaAtual < linhas-1)
+		{
+			if (tamPadrao != str[linhaAtual].length())
+			{
+				contador++;
+				break;
+			}
+			linhaAtual++;
+		}
+		
+		if(contador == 0) {
+			this.coluna = tamPadrao;
+		}
+		else {
+			throw new Exception("Tamanho das colunas não é igual.");
+		}
+	}
+
+	
+	private void preencheMatriz(String lab, int linhas) {
+		try{
+			String str[] = new String [linhas];
+			str = lab.split("\n");
+
+			for(int i = 0; i < this.linha; i++)
+			{
+				this.LabMatriz[i] = str[i].toCharArray();
+			}
+		}
+		
+	catch(Exception e) {}
+	}
+	
 	private void preencheMatriz(String nomeArq) {
 		int i;
 		BufferedReader in = null;
@@ -83,7 +154,8 @@ public class Labirinto implements Cloneable
 	catch(IOException e) {}
 	}
 
-	public void validaLabirinto () throws Exception
+	
+	private void validaLabirinto () throws Exception
 	    {
 	            int ecount = 0, scount = 0, hashcount = 0;
 
@@ -156,7 +228,8 @@ public class Labirinto implements Cloneable
  	
 	public Coordenada getEntrada()
     {
-        return entrada;
+		Coordenada e = (Coordenada)entrada.clone();
+        return e;
     }
 	
 	public int getLinha()
@@ -175,7 +248,11 @@ public class Labirinto implements Cloneable
 	public String toString() {
 		String labReescrito = String.valueOf(this.LabMatriz[0]) + "\n";
 		for(int i = 1; i < this.linha; i++) {
-			labReescrito += String.valueOf(this.LabMatriz[i]) + "\n";
+			if(i == this.linha -1)
+				labReescrito += String.valueOf(this.LabMatriz[i]);
+			else
+				labReescrito += String.valueOf(this.LabMatriz[i]) + "\n";
+			
 		}
 		return labReescrito;
 	}

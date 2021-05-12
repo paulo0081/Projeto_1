@@ -3,21 +3,34 @@ public class Coordenada {
 	private int coordX;
 	private int coordY;
 	
+	/**
+	 * Constrói um objeto Coordenada com os valores de 'x' e 'y' passados.
+	 * @param int x - Valor da posição 'x'
+	 *
+	*/
 	public Coordenada(int x,int y) {
 		coordX = x;
 		coordY = y;
 	}
 	
+	
+	/**
+	 * Retorna a propriedade de coordenada, no eixo X. 
+     * @return int
+     */
 	public int getX()
 	{
 		return coordX;
 	}
 	
+	/**
+	 * Retorna a propriedade de coordenada, no eixo Y. 
+     * @return int
+     */
 	public int getY()
 	{
 		return coordY;
 	}
-	
 	
 	
 	@Override
@@ -65,13 +78,19 @@ public class Coordenada {
         return hashedX + hashedY;
     }
 	
-	public Coordenada (Coordenada modelo){
-
+	
+	/**
+	 * Construtor com a função de fazer uma deep copy de uma coordenada. 
+	 * 
+	 * @param coordenada: se refere ao objeto a ser clonado.
+     */
+	public Coordenada(Coordenada modelo){
         this.coordX = modelo.coordX;
         this.coordY = modelo.coordY;
 
     }
-
+	
+	@Override
     public Object clone () {
 
         Coordenada aux = null;
@@ -85,11 +104,20 @@ public class Coordenada {
 
         return aux;
     }
-
+	
+	/**
+	 * Compara os valores da coordenada X.
+	 * -1 se X do comparador for menor que o comparado,
+	 *  0 se X do comparador for igual    ao comparado,
+	 *  1 se X do comparador for maior que o comparado. 
+	 * 
+	 * @param coordenada: se refere a coordenada comparada.
+     * @return int:
+     */
     public int compareTo (Coordenada coordenada){
 
         if(this.coordX < coordenada.coordX) return -1;
-        if(this.coordY < coordenada.coordY) return -2;
+        if(this.coordX > coordenada.coordX) return  1;
         return 0;
     }
 }
