@@ -1,4 +1,8 @@
-
+ /**
+     * Classe de navegacao clonada que tem pilhas de coordenada 
+     * @param coordenadas do labirinto 1 e o valor de x e y
+     * @throws Exception exceções de validação de erro
+     */
 public class Navegacao implements Cloneable
 {
 	
@@ -6,7 +10,9 @@ public class Navegacao implements Cloneable
 	Pilha<Coordenada> pilhaMenor;
 	Pilha<Pilha<Coordenada>> pilhaMaior;
 		
-		
+	/**
+	 * #Precisa fazer#
+	*/
 	public Navegacao(Labirinto l) throws Exception {
 		try {
 			this.c = l.getEntrada();
@@ -20,6 +26,12 @@ public class Navegacao implements Cloneable
 		
 	}
 	
+	 /**
+     * Método responsável por validar as posicoes ao redor da coordenada
+     * @param valor inteiro de x, y e labirinto 1
+     * @return returna valor 0 ou 1
+     * @throws Exception exceções de validação das posições do labirinto
+     */
 	private int validaArredor(int x, int y, Labirinto l) throws Exception {
 		int ret;
 		
@@ -38,6 +50,11 @@ public class Navegacao implements Cloneable
 		return 0;
 	}
 	
+	  /**
+     * Método responsável por percorrer o labirinto
+     * @param objeto do tipo labirinto 
+     * @throws Exception exceções de validação do labirinto
+     */
 	private void prosseguir(Labirinto l) throws Exception {
 		int resposta = 0;
 		
@@ -64,6 +81,11 @@ public class Navegacao implements Cloneable
 		}
 	}
 	
+	  /**
+     * Método responsável por voltar o que ja foi percorrido
+     * @param obejto do tipo labirinto 
+     * @throws Exception exceções de validação de saida
+     */
 	private void retroceder(Labirinto l) throws Exception {
 		if(this.pilhaMaior.isVazia()){
 			throw new Exception ("Saída não encontrada");

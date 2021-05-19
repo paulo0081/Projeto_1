@@ -1,5 +1,9 @@
 import java.util.Scanner;
 
+/**
+ * Método responsável pela Main do projeto
+ * @param passa um parameto de String
+ */
 public class Main {
 
 	public static void  main(String[] args){

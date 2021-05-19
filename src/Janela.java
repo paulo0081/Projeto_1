@@ -7,7 +7,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.*;
 
 
-
+/**
+ * Classe que contém os componentes da Janela
+ 
+ */
 public class Janela{
 	private JFrame  janela     = new JFrame  ("Labirinto");
     private JLabel  visor      = new JLabel  ("Inicio, aqui ficará o log de Erros", JLabel.LEFT);
@@ -17,7 +20,10 @@ public class Janela{
     private JFileChooser fc    = new JFileChooser();
     
     
-    
+    /**
+     * Construtor responsável por criar a janela
+     
+     */
     public Janela()
     {
     	
@@ -66,6 +72,11 @@ public class Janela{
         this.botao[5].addActionListener(new RegrasLab ());
     }
     
+    /**
+     * Método responsável por criar labirinto
+     *  
+ 
+     */
     private class CriarLab  implements ActionListener
     {
 		public void actionPerformed(ActionEvent e) {
@@ -75,6 +86,11 @@ public class Janela{
 		}
     }
     
+    /**
+     * Método responsável por Abrir o labirinto
+     * 
+     
+     */
     private class AbrirLab  implements ActionListener
     {
         public void actionPerformed(ActionEvent e) 
@@ -84,11 +100,11 @@ public class Janela{
             File fi=null;
             Arquivos aux = new Arquivos();
             try {
-            fc.setDialogTitle("Abrir Labirinto");
-            fc.setAcceptAllFileFilterUsed(false);
-            FileNameExtensionFilter extFilter = new FileNameExtensionFilter(".txt File", "txt");
-            fc.addChoosableFileFilter(extFilter);
-            int result = fc.showOpenDialog(null);
+	            fc.setDialogTitle("Abrir Labirinto");
+	            fc.setAcceptAllFileFilterUsed(false);
+	            FileNameExtensionFilter extFilter = new FileNameExtensionFilter(".txt File", "txt");
+	            fc.addChoosableFileFilter(extFilter);
+	            int result = fc.showOpenDialog(null);
 
             if(result == JFileChooser.APPROVE_OPTION) 
             {
@@ -97,10 +113,7 @@ public class Janela{
                 lab = aux.openTxt(labCam);
                 textArea.setText(lab);
             }
- 
-            	FileReader fw = new FileReader(fi.getPath());
-                fw.read();
-                fw.close();
+            	controle = null;
             } catch(Exception e2) {
             	String texto = e2.toString();
 				visor.setForeground(Color.red);
@@ -109,6 +122,10 @@ public class Janela{
         }
     }
 
+    /**
+     * Método responsável por Salvar o Labirinto
+     
+     */
     private class SalvarLab implements ActionListener
     {
     	public void actionPerformed(ActionEvent e) {
@@ -148,6 +165,10 @@ public class Janela{
     	} 
     }
     
+    /**
+     * Método responsável por executar o labirinto
+    
+     */
     private class ExecLab   implements ActionListener
     {
 		public void actionPerformed(ActionEvent e) {
@@ -169,6 +190,10 @@ public class Janela{
 		//.getLineCount
     }
     
+    /**
+     * Método responsável pelas regras do labirinto
+  
+     */
     private class RegrasLab implements ActionListener
     {
     	public void actionPerformed(ActionEvent e) {
@@ -186,6 +211,9 @@ public class Janela{
     	}
     }
     
+    /**
+     * Método responsável por Limpar o Labirinto
+     */
     private class LimparLab implements ActionListener
     {
     	public void actionPerformed(ActionEvent e) {

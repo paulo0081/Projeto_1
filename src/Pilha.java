@@ -1,16 +1,28 @@
+ /**
+     * Classe pilha
+     
+     */	
 public class Pilha <X> implements Cloneable
-{
+	{
     private Object[] elemento; // private X[] elemento;
     private int      tamanhoInicial;
     private int      ultimo = -1; // vazia
     
+    /**
+     * Construtor responsável por montar a Pilha
     
+     */
     public Pilha ()
     {
         this.elemento       = new Object [10]; // this.elemento = new X [10];
         this.tamanhoInicial = 10;
     }
     
+    /**
+     * Construtor responsável por montar a Pilha
+     * @param valor do tamanho da pilha
+     * @throws Exception exceções de validação do tamanho selecionado
+     */
     public Pilha (int tamanho) throws Exception
     {
         if (tamanho<=0)
@@ -20,11 +32,22 @@ public class Pilha <X> implements Cloneable
         this.tamanhoInicial = tamanho;
     }
     
+    /**
+     * Método responsável por calcular a quantidade de objetos dentro da pilha
+    
+     * @return retorna a quantidade ao chegar no ultimo + 1
+     
+     */
     public int getQuantidade ()
     {
         return this.ultimo+1;
     }
     
+    /**
+     * Método responsável por redimensionar a pilha
+     * @param da valor ao fator
+     
+     */
     private void redimensioneSe (float fator)
     {
         // X[] novo = new X [Math.round(this.elemento.length*fator)];
@@ -36,6 +59,12 @@ public class Pilha <X> implements Cloneable
         this.elemento = novo;
     }
     
+    /**
+     * Método responsável por guardar um item
+     * @param valor de x
+  
+     * @throws Exception exceções de validação se o x é igual a null
+     */
     public void guardeUmItem (X x) throws Exception
     {
         if (x==null)
@@ -48,6 +77,12 @@ public class Pilha <X> implements Cloneable
         this.elemento[this.ultimo]=x;
     }
 
+    /**
+     * Método responsável por recuperar um item da pilha
+   
+     * @return retorna o o elemento no topo da pilha 
+     * @throws Exception exceções caso a pilha esteja vazia 
+     */
     public X recupereUmItem () throws Exception
     {
         if (this.ultimo==-1)
@@ -56,6 +91,12 @@ public class Pilha <X> implements Cloneable
         return (X)this.elemento[this.ultimo];
     }
 
+    /**
+     * Método responsável por recuperar um item da pilha
+   
+     * @return retorna o o elemento no topo da pilha 
+     * @throws Exception exceções caso a pilha esteja vazia 
+     */
     public void removaUmItem () throws Exception
     {
         if (this.ultimo==-1) // vazia
@@ -69,11 +110,23 @@ public class Pilha <X> implements Cloneable
             this.redimensioneSe (0.5F);
     }
     
+    /**
+     * Método responsável por verificar se a pilha esta cheia
+    
+     * @return retorna true ou false se a pilha esta cheia
+    
+     */
     public boolean isCheia ()
     {
         return this.ultimo+1==this.elemento.length;
     }
 
+    /**
+     * Método responsável por verificar se a pilha esta vazia
+  
+     * @return retorna o ultimo item da pilha - 1 posicao
+     
+     */
     public boolean isVazia ()
     {
         return this.ultimo==-1;
@@ -141,6 +194,12 @@ public class Pilha <X> implements Cloneable
         return ret;
     }
     
+    /**
+     * Método responsável pelo modelo x de pilha
+     * @param modelo de tipo pilha x
+     
+     * @throws Exception exceções de validação do modelo da pilha
+     */
     public Pilha (Pilha<X> modelo) throws Exception 
     {
     	if(modelo == null)
@@ -164,6 +223,7 @@ public class Pilha <X> implements Cloneable
 		}
     }
     
+    @Override
     public Object clone()
     {
     	
@@ -176,6 +236,12 @@ public class Pilha <X> implements Cloneable
     	return ret;
     }
     
+    /**
+     * Método responsável por comparar as duas pilhas
+     * @param uma pilha de pilha
+     * @return 
+     
+     */
     public int compareTo(Pilha<X> pilha) 
     {
     	if(this.getQuantidade() < pilha.getQuantidade())

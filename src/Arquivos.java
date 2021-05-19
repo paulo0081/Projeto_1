@@ -2,6 +2,12 @@ import java.io.*;
 
 public class Arquivos {
 	
+	 /**
+    * Método responsável por carregar um arquivo txt e retorna-lo em String
+    * 
+    * @return estrutura String de labirinto
+    * @throws Exception exceções de encontrar arquivo
+    */
 	public void readTxt() {
 		BufferedReader in = null;
 		try{
