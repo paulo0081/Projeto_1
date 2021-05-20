@@ -8,8 +8,7 @@ import java.io.*;
 
 
 /**
- * Classe que contém os componentes da Janela
- 
+ * Classe que contém os componentes da Janela 
  */
 public class Janela{
 	private JFrame  janela     = new JFrame  ("Labirinto");
@@ -21,8 +20,7 @@ public class Janela{
     
     
     /**
-     * Construtor responsável por criar a janela
-     
+     * Construtor responsável pela criação da janela e seu respectivo layout.
      */
     public Janela()
     {
@@ -73,9 +71,7 @@ public class Janela{
     }
     
     /**
-     * Método responsável por criar labirinto
-     *  
- 
+     * Método responsável por permitir a criação de um labirinto pelo usuário
      */
     private class CriarLab  implements ActionListener
     {
@@ -87,9 +83,7 @@ public class Janela{
     }
     
     /**
-     * Método responsável por Abrir o labirinto
-     * 
-     
+     * Método responsável por abrir um labirinto previamente existente no armazenamento do usuário.
      */
     private class AbrirLab  implements ActionListener
     {
@@ -123,8 +117,7 @@ public class Janela{
     }
 
     /**
-     * Método responsável por Salvar o Labirinto
-     
+     * Método responsável por salvar/armazenar o labirinto.
      */
     private class SalvarLab implements ActionListener
     {
@@ -166,8 +159,7 @@ public class Janela{
     }
     
     /**
-     * Método responsável por executar o labirinto
-    
+     * Método responsável por executar o labirinto para que ele seja resolvido.
      */
     private class ExecLab   implements ActionListener
     {
@@ -187,12 +179,10 @@ public class Janela{
 				visor.setText(texto);
 			}
 		}
-		//.getLineCount
     }
     
     /**
-     * Método responsável pelas regras do labirinto
-  
+     * Método responsável por dispor as regras para a criação de um labirinto
      */
     private class RegrasLab implements ActionListener
     {
@@ -212,7 +202,7 @@ public class Janela{
     }
     
     /**
-     * Método responsável por Limpar o Labirinto
+     * Método responsável por limpar o caminho do labirinto
      */
     private class LimparLab implements ActionListener
     {

@@ -1,12 +1,14 @@
 import java.io.*;
 
+
+/**
+ * Classe responsável pelas operações de manuseio de arquivos
+ */
 public class Arquivos {
 	
 	 /**
-    * Método responsável por carregar um arquivo txt e retorna-lo em String
-    * 
-    * @return estrutura String de labirinto
-    * @throws Exception exceções de encontrar arquivo
+    * Método responsável por carregar e ler um arquivo .txt 
+    * @throws Exception exceção ao não encontrar o arquivo para ser lido
     */
 	public void readTxt() {
 		BufferedReader in = null;
@@ -22,7 +24,7 @@ public class Arquivos {
 	}
 	
 	/**
-	 * Retorna uma String contendo o  conteúdo do arquivo .txt passado. 
+	 * Método responsável por retornar uma String contendo o conteúdo do arquivo .txt passado. 
      * @param arq - nome do arquivo que será lido no método.
      * @return String
      */

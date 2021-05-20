@@ -1,7 +1,5 @@
- /**
-     * Classe de navegacao clonada que tem pilhas de coordenada 
-     * @param coordenadas do labirinto 1 e o valor de x e y
-     * @throws Exception exceções de validação de erro
+/**
+     * Classe responsável pela navegação em um labirinto.
      */
 public class Navegacao implements Cloneable
 {
@@ -11,7 +9,9 @@ public class Navegacao implements Cloneable
 	Pilha<Pilha<Coordenada>> pilhaMaior;
 		
 	/**
-	 * #Precisa fazer#
+	 * Contrutor de Navegação.
+	 * @param l - labirinto a ser navegado.
+	 * @throws Exception exceções de validação entrada e do manuseio da pilha.
 	*/
 	public Navegacao(Labirinto l) throws Exception {
 		try {
@@ -28,9 +28,10 @@ public class Navegacao implements Cloneable
 	
 	 /**
      * Método responsável por validar as posicoes ao redor da coordenada
-     * @param valor inteiro de x, y e labirinto 1
-     * @return returna valor 0 ou 1
-     * @throws Exception exceções de validação das posições do labirinto
+     * @param x - valor referente a 'x'.
+     * @param y - valor referente a 'y'.
+     * @param l - labirinto para ocorrer a validação do arredor.
+     * @return returna valor 0 ou 1.
      */
 	private int validaArredor(int x, int y, Labirinto l) throws Exception {
 		int ret;
@@ -51,9 +52,9 @@ public class Navegacao implements Cloneable
 	}
 	
 	  /**
-     * Método responsável por percorrer o labirinto
-     * @param objeto do tipo labirinto 
-     * @throws Exception exceções de validação do labirinto
+     * Método responsável por percorrer o labirinto.
+     * @param l - labirinto a ser percorrido.
+     * @throws Exception exceções de validação do labirinto.
      */
 	private void prosseguir(Labirinto l) throws Exception {
 		int resposta = 0;
@@ -83,7 +84,7 @@ public class Navegacao implements Cloneable
 	
 	  /**
      * Método responsável por voltar o que ja foi percorrido
-     * @param obejto do tipo labirinto 
+     * @param l - labirinto a ser retrocedido
      * @throws Exception exceções de validação de saida
      */
 	private void retroceder(Labirinto l) throws Exception {
@@ -178,7 +179,11 @@ public class Navegacao implements Cloneable
 		return ret;
 		
 	}
-
+	/**
+	 * Método responsável por comparar o tamanho de dois objetos do tipo Navegação.
+	 * @param nav - objeto a ser comparado
+	 * @return Retorna 1 caso this seja maior e -1 caso nav seja maior.
+	 */
 	public int compareTo(Navegacao nav) {
 
 		if(this.pilhaMenor.getQuantidade() > nav.pilhaMenor.getQuantidade()) return  1;
@@ -187,9 +192,8 @@ public class Navegacao implements Cloneable
 	}
 	
 	/**
-	 * Construtor com a função de fazer uma deep copy da Navegação. 
-	 * 
-	 * @param coordenada: se refere ao objeto a ser clonado.
+	 * Construtor com a função de fazer uma deep copy da Navegação.
+	 * @param nav - objeto a ser copiado.
      */
 	public Navegacao (Navegacao nav) throws Exception {
 		

@@ -1,7 +1,7 @@
- /**
-     * Classe pilha
-     
-     */	
+/**
+ * Classe responsavel pelo manuseio da pilha.
+ * @param <X> - tipo do objeto a ser empilhado
+ */
 public class Pilha <X> implements Cloneable
 	{
     private Object[] elemento; // private X[] elemento;
@@ -9,8 +9,7 @@ public class Pilha <X> implements Cloneable
     private int      ultimo = -1; // vazia
     
     /**
-     * Construtor responsável por montar a Pilha
-    
+     * Construtor responsável por montar a Pilha.
      */
     public Pilha ()
     {
@@ -19,9 +18,9 @@ public class Pilha <X> implements Cloneable
     }
     
     /**
-     * Construtor responsável por montar a Pilha
-     * @param valor do tamanho da pilha
-     * @throws Exception exceções de validação do tamanho selecionado
+     * Construtor responsável por montar a Pilha.
+     * @param tamanho - tamanho da pilha.
+     * @throws Exception exceções de validação do tamanho selecionado.
      */
     public Pilha (int tamanho) throws Exception
     {
@@ -31,12 +30,9 @@ public class Pilha <X> implements Cloneable
         this.elemento       = new Object [tamanho]; // this.elemento = new X [tamanho];
         this.tamanhoInicial = tamanho;
     }
-    
     /**
-     * Método responsável por calcular a quantidade de objetos dentro da pilha
-    
-     * @return retorna a quantidade ao chegar no ultimo + 1
-     
+     * Método responsável por calcular a quantidade de objetos dentro da pilha.
+     * @return retorna a quantidade ao chegar no ultimo + 1.
      */
     public int getQuantidade ()
     {
@@ -44,9 +40,8 @@ public class Pilha <X> implements Cloneable
     }
     
     /**
-     * Método responsável por redimensionar a pilha
-     * @param da valor ao fator
-     
+     * Método responsável por redimensionar a pilha caso necessário.
+     * @param fator - fator multiplicativo para o redimensionamento da pilha.
      */
     private void redimensioneSe (float fator)
     {
@@ -60,10 +55,9 @@ public class Pilha <X> implements Cloneable
     }
     
     /**
-     * Método responsável por guardar um item
-     * @param valor de x
-  
-     * @throws Exception exceções de validação se o x é igual a null
+     * Método responsável por guardar um item.
+     * @param x - item a ser guardado.
+     * @throws Exception exceções de validação se o x é igual a null.
      */
     public void guardeUmItem (X x) throws Exception
     {
@@ -78,10 +72,9 @@ public class Pilha <X> implements Cloneable
     }
 
     /**
-     * Método responsável por recuperar um item da pilha
-   
-     * @return retorna o o elemento no topo da pilha 
-     * @throws Exception exceções caso a pilha esteja vazia 
+     * Método responsável por recuperar um item da pilha.
+     * @return retorna o elemento no topo da pilha. 
+     * @throws Exception exceções caso a pilha esteja vazia.
      */
     public X recupereUmItem () throws Exception
     {
@@ -92,9 +85,7 @@ public class Pilha <X> implements Cloneable
     }
 
     /**
-     * Método responsável por recuperar um item da pilha
-   
-     * @return retorna o o elemento no topo da pilha 
+     * Método responsável por remover um item da pilha.
      * @throws Exception exceções caso a pilha esteja vazia 
      */
     public void removaUmItem () throws Exception
@@ -111,10 +102,8 @@ public class Pilha <X> implements Cloneable
     }
     
     /**
-     * Método responsável por verificar se a pilha esta cheia
-    
-     * @return retorna true ou false se a pilha esta cheia
-    
+     * Método responsável por verificar se a pilha esta cheia.
+     * @return retorna true ou false se a pilha estiver cheia ou não.
      */
     public boolean isCheia ()
     {
@@ -122,10 +111,8 @@ public class Pilha <X> implements Cloneable
     }
 
     /**
-     * Método responsável por verificar se a pilha esta vazia
-  
-     * @return retorna o ultimo item da pilha - 1 posicao
-     
+     * Método responsável por verificar se a pilha está vazia.
+     * @return retorna o ultimo item da pilha - 1.
      */
     public boolean isVazia ()
     {
@@ -195,10 +182,9 @@ public class Pilha <X> implements Cloneable
     }
     
     /**
-     * Método responsável pelo modelo x de pilha
-     * @param modelo de tipo pilha x
-     
-     * @throws Exception exceções de validação do modelo da pilha
+     * Contrutor de cópia de Pilha.
+     * @param modelo - pilha a ser copiada.
+     * @throws Exception exceções de validação do modelo da pilha.
      */
     public Pilha (Pilha<X> modelo) throws Exception 
     {
@@ -237,16 +223,15 @@ public class Pilha <X> implements Cloneable
     }
     
     /**
-     * Método responsável por comparar as duas pilhas
-     * @param uma pilha de pilha
-     * @return 
-     
+     * Método responsável por comparar as duas pilhas e dizer qual é a maior/menor.
+     * @param pilha - pilha a ser comparada. 
+     * @return Retorna -1 caso this seja menor e 1 caso pilha seja menor.
      */
     public int compareTo(Pilha<X> pilha) 
     {
     	if(this.getQuantidade() < pilha.getQuantidade())
     		return -1;
-    	if(this.getQuantidade() < pilha.getQuantidade())
+    	if(this.getQuantidade() > pilha.getQuantidade())
     		return 1;
     	return 0;
     }

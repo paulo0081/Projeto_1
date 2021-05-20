@@ -1,9 +1,7 @@
 import java.io.*;
 
 /**
- * Método responsável por clonar o labirinto 
- * @return estrutura Clone de labirinto
- * @throws Exception exceções de validação de arquivo
+ * Classe responsável pelo manuseio de um labirinto.
  */
 
 public class Labirinto implements Cloneable
@@ -14,7 +12,9 @@ public class Labirinto implements Cloneable
 	private Coordenada entrada, saida;
 	
 	/**
-	 * #Precisa fazer#
+	 * Método responsável pela contrução de um labirinto.
+	 * @param Arq - caminho para o arquivo de onde as informações do labirinto estão sendo acessadas.
+	 * @throws Exception exceções de validação de linha, coluna e caso o arquivo esteja vazio.
 	*/
 	public Labirinto(String Arq) throws Exception{
 		try {
@@ -45,10 +45,11 @@ public class Labirinto implements Cloneable
 	}
 	
 	/**
-     * Construtor responsável por montar o objeto do labirinto
-     * @param String contendo o desenho do labirinto e linhas contendo a quantidade linhas do mesmo
-     * @throws Exception exceções de validação de linha e coluna
-     */
+	 * Método responsável pela contrução de um labirinto.
+	 * @param Lab - um labirinto, mas já em forma de string.
+	 * @param linhas - número de linhas existentes no labirinto.
+	 * @throws Exception exceções de validação de linha e coluna.
+	*/
 	public Labirinto(String Lab, int linhas) throws Exception{
 		try {
 			
@@ -74,9 +75,9 @@ public class Labirinto implements Cloneable
 	
 	
 	/**
-     * Método responsável por definir o tamanho das linhas e colunas do labirinto
-     * @param String de nome do Arquivo
-     * @throws Exception exceções de validação do tamanho da coluna 
+     * Método responsável por definir o tamanho das linhas e colunas do labirinto.
+     * @param nomeArq - arquivo a ser acessado para a obtenção das informações.
+     * @throws Exception caso o tamanho das colunas não forem iguais.
      */
 	private void defineTamanho(String nomeArq) throws Exception {
 		
@@ -111,9 +112,10 @@ public class Labirinto implements Cloneable
 	}
 	
 	/**
-     * Método responsável por definir o tamanho das colunas e linhas do labirinto
-     * @param String de lab e numero de linhas
-     * @throws Exception exceções de validação do tamanho da coluna 
+     * Método responsável por definir o tamanho das linhas e colunas do labirinto.
+     * @param lab - labirinto ja em formato de String.
+     * @param linhas - tamanho das linhas.
+     * @throws Exception caso o tamanho das colunas não forem iguais.
      */
 	private void defineTamanho(String lab, int linhas) throws Exception {
 
@@ -146,7 +148,8 @@ public class Labirinto implements Cloneable
 
 	/**
      * Método responsável por preencher a Matriz
-     * @param String de lab e numero de linhas
+     * @param lab - labirinto já no formato de String.
+     * @param linhas - tamanho das linhas.
      */
 	private void preencheMatriz(String lab, int linhas) {
 		try{
@@ -163,9 +166,8 @@ public class Labirinto implements Cloneable
 	}
 	
 	/**
-     * Método responsável por preencher a Matriz
-     * @param String do nome do Arquivo
-     
+     * Método responsável por preencher a Matriz.
+     * @param nomeArq - arquivo que será acessado para a obtenção das informações.
      */
 	private void preencheMatriz(String nomeArq) {
 		int i;
@@ -188,7 +190,6 @@ public class Labirinto implements Cloneable
 
 	/**
      * Método responsável por validar o Labirinto
-     
      * @throws Exception exceções de validação do valor de entrada, saida e estrutura de paredes
      */
 	private void validaLabirinto () throws Exception
@@ -230,10 +231,12 @@ public class Labirinto implements Cloneable
 	    }
 	
 	/**
-     * Método responsável por verificar o Arredor
-     * @param valor de x e de y da coordenada a ser verificada
-     * @return Retorna o valor de 0, 1 ou 2 para verificar se tem espaco ao redor
-     * @throws Exception exceções de validação de caracter ao redor
+	 * <pre>
+     * Método responsável por verificar o arredor de uma coordenada especificada.
+     * @param x - valor referente ao 'x' a ser verificado.
+     * @param y - valor referente ao 'y' a ser verificado.
+     * @return Retorna o valor de 0, 1 ou 2 para verificar se tem espaço ao redor.
+     * @throws Exception exceções de validação de caracter ao redor.
      */
 	public int verificarArredor(int x, int y) throws Exception {
 		
@@ -254,9 +257,9 @@ public class Labirinto implements Cloneable
 	}
 	
 	/**
-     * Método responsável por modificar o caminho
-     * @param Coodenada de c e valor inteiro indicando se o caminho passará ' ' ou *
-     
+     * Método responsável por modificar/preencher o caminho
+     * @param c - coordenada a ser modificada
+     * @param tipo - flag informando se é um espaço vago ou não.
      */
 	public void modificarCaminho (Coordenada c, int tipo) {
 		if(this.LabMatriz[c.getX()][c.getY()] == ' ' && tipo == 0) {
@@ -269,10 +272,8 @@ public class Labirinto implements Cloneable
 	}
 	
 	/**
-     * Método responsável pela saida
-     
-     * @return coordenada da saida
-     
+     * Método responsável por obter o valor de saída.
+     * @return Retorna a coordenada referente à saída.
      */
  	public Coordenada getSaida()
 	{
@@ -280,10 +281,8 @@ public class Labirinto implements Cloneable
 	}	
  	
  	/**
-     * Método responsável pela entrada
-     
-     * @return a coordenada da entrada 
-     
+     * Método responsável por obter o valor da entrada.
+     * @return Retorna a coordenada referente à entrada, porém clonada.
      */
 	public Coordenada getEntrada()
     {
@@ -292,10 +291,8 @@ public class Labirinto implements Cloneable
     }
 	
 	/**
-     * Método responsável pela linha
-     
-     * @return quantidade de linhas
-     
+     * Método responsável por obter o valor da linha.
+     * @return Retorna a quantidade de linhas.
      */
 	public int getLinha()
 	{
@@ -303,17 +300,13 @@ public class Labirinto implements Cloneable
 	}
 	
 	/**
-     * Método responsável pela coluna
-     
-     * @return quantidade de colunas
-     
+     * Método responsável por obter o valor da coluna.
+     * @return Retorna a quantidade de colunas.
      */
 	public int getColuna()
 	{
 		return coluna;
 	}
-
-	
 	
 	@Override
 	public String toString() {
@@ -381,10 +374,9 @@ public class Labirinto implements Cloneable
 	}
 	
 	 /**
-    * Método responsável pelo Labirinto
-    * @param modelo do labirinto
-    * @return o modelo do labirinto
-    * @throws Exception exceções de validação do modelo do labirinto
+    * Construtor de cópia de um labirinto.
+    * @param modelo - labirinto a ser copiado.
+    * @throws Exception exceções de validação do modelo do labirinto.
     */
 	public Labirinto (Labirinto modelo) throws Exception
 	{
@@ -404,10 +396,8 @@ public class Labirinto implements Cloneable
 	}
 	
 	 /**
-    * Método responsável por clonar um objeto
-    
+    * Método responsável por clonar um objeto do tipo labirinto.
     * @return novo labirinto clonado
-   
     */
 	public Object clone ()
 	{
@@ -423,4 +413,3 @@ public class Labirinto implements Cloneable
 		return ret;
 	}
 }
-	
