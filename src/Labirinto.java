@@ -1,8 +1,8 @@
 import java.io.*;
 
-/**
- * Classe responsável pelo manuseio de um labirinto.
- */
+	/**
+	 * Classe responsável pelo manuseio de um labirinto.
+	 */
 
 public class Labirinto implements Cloneable
 {

@@ -5,6 +5,10 @@ import javax.swing.border.Border;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.io.*;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.sql.Date;
+import java.time.LocalDate;
 
 
 /**
@@ -16,14 +20,18 @@ public class Janela{
     private JButton botao []   = new JButton [6];
     private JTextArea textArea = new JTextArea("Bem vindo!\n");
     private Labirinto controle = null;
-    private JFileChooser fc    = new JFileChooser();
+    private Parceiro servidor;
+
     
     
     /**
      * Construtor responsável pela criação da janela e seu respectivo layout.
      */
-    public Janela()
+    public Janela(Parceiro serv)
     {
+    	if(serv != null)
+    		servidor = serv;
+    	
     	
     	JPanel botoes = new JPanel();
         botoes.setLayout (new GridLayout(2,3));
@@ -89,29 +97,27 @@ public class Janela{
     {
         public void actionPerformed(ActionEvent e) 
         {
-        	textArea.setEditable(true);
-            String labCam = "", lab="";
-            File fi=null;
-            Arquivos aux = new Arquivos();
-            try {
-	            fc.setDialogTitle("Abrir Labirinto");
-	            fc.setAcceptAllFileFilterUsed(false);
-	            FileNameExtensionFilter extFilter = new FileNameExtensionFilter(".txt File", "txt");
-	            fc.addChoosableFileFilter(extFilter);
-	            int result = fc.showOpenDialog(null);
-
-            if(result == JFileChooser.APPROVE_OPTION) 
-            {
-                fi = fc.getSelectedFile();
-                labCam = fi.toString();
-                lab = aux.openTxt(labCam);
-                textArea.setText(lab);
-            }
-            	controle = null;
-            } catch(Exception e2) {
-            	String texto = e2.toString();
-				visor.setForeground(Color.red);
-				visor.setText(texto);
+        	String ip;
+            String nome;
+    		try {
+            	ip = InetAddress.getLocalHost().getHostAddress();
+            	nome = JOptionPane.showInputDialog("Insira um nome");
+            	servidor.receba(new PedidoDeResultado(nome, ip));
+            	Comunicado comunicado = null;
+				do
+				{
+					comunicado = (Comunicado)servidor.espie ();
+				}
+				while (!(comunicado instanceof Resultado));
+				Resultado resultado = (Resultado)servidor.envie ();
+				textArea.setText("");
+				textArea.setEditable(true);
+				textArea.setText(resultado.toString());
+				
+    		}catch(Exception e1) {
+            	String texto = e1.toString();
+                visor.setForeground(Color.red);
+                visor.setText(texto);
             }
         }
     }
@@ -122,38 +128,31 @@ public class Janela{
     private class SalvarLab implements ActionListener
     {
     	public void actionPerformed(ActionEvent e) {
-            String lab = textArea.getText();
-
-            int linha = textArea.getLineCount();
-
-            try { 
-	            fc.setDialogTitle("Salvar Labirinto");
-	            fc.setAcceptAllFileFilterUsed(false);
-	            FileNameExtensionFilter extFilter = new FileNameExtensionFilter(".txt File", "txt");
-	            fc.addChoosableFileFilter(extFilter);
-	            int result = fc.showSaveDialog(null);
-	            Labirinto labir = new Labirinto(textArea.getText(), textArea.getLineCount());
-				controle = (Labirinto) labir.clone();
-				
-				Navegacao nav = new Navegacao(labir);
-	            
-	            
-	            
-	
-	            if(result == JFileChooser.APPROVE_OPTION) {
-	            	File fi = fc.getSelectedFile();
-	
-		            FileWriter fw = new FileWriter(fi.getPath() + ".txt");
-		            fw.write(lab);
-		            fw.flush();
-		            fw.close();
-	             }
+            String ip;
+            Date data;
+            String labirinto;
+            String nome;
             
-	         } catch(Exception e2) {
-	        	 	String texto = e2.toString();
-					visor.setForeground(Color.red);
-					visor.setText(texto);
-	         }      
+            
+    		try {
+    			int linha = textArea.getLineCount();
+    			
+    			Labirinto labir = new Labirinto(textArea.getText(), textArea.getLineCount());
+                controle = (Labirinto) labir.clone();
+                nome = JOptionPane.showInputDialog("Insira um nome");
+                Navegacao nav = new Navegacao(labir);
+    			
+    			
+            	ip = InetAddress.getLocalHost().getHostAddress();
+            	data = Date.valueOf(LocalDate.now());
+            	labirinto = textArea.getText();
+            	servidor.receba(new PedidoDeSalvar(nome, ip, data, labirinto));
+            	
+            }catch(Exception e1) {
+            	String texto = e1.toString();
+                visor.setForeground(Color.red);
+                visor.setText(texto);
+            }
             
     	} 
     }
@@ -219,4 +218,5 @@ public class Janela{
     		}
     	}
     }
+    
 }
