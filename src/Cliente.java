@@ -1,12 +1,26 @@
 import java.net.*;
 import java.io.*;
 
+
+/**
+ * Classe principal, responsável pela conexão do client com o servidor através do socket. Portanto, essa classe lida tanto com a conexão inicial ao servidor, tanto com a tratativa de desligamento.
+ */
 public class Cliente
 {
 	public static final String HOST_PADRAO  = "172.16.0.135";
 	public static final int    PORTA_PADRAO = 4500;
 	private static int contador = 0, info = 0;
 
+	/**
+	 * Método main, responsavel por toda a tratativa, desde a conexão até a desconexão com o servidor.
+	 * @param args - É um array de strings, podendo ser utilizado para conexão com diferentes hosts e portas
+	 * @throws Exception Exceção de validação das portas e hosts
+	 * @throws Exception Exceção para caso não seja possível conectar o transmissor 
+	 * @throws Exception Exceção para caso não seja possível conectar o receptor
+	 * @throws Exception Exceção para caso não seja possível conectar com o servidor
+	 * @throws Exception Exceção para caso não seja possível estabelecer a conexão do servidor com a tratadora de desligamento
+	 * @throws Exception Exceção para caso não seja possível desconectar-se do servidor
+	*/
 	public static void main (String[] args)
 	{
         if (args.length>2)

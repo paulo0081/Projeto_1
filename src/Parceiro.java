@@ -3,6 +3,9 @@ import java.net.*;
 import java.util.*;
 import java.util.concurrent.Semaphore;
 
+/**
+ * Classe Parceiro, resposável pela conexão geral com o servidor. Recebendo, o socket, criado na classe Cliente, assim como o receptor e transmissor.
+ */
 public class Parceiro
 {
     private Socket             conexao;
@@ -13,6 +16,15 @@ public class Parceiro
 
     private Semaphore mutEx = new Semaphore (1,true);
 
+    /**
+	 * Construtor Parceiro, responsavel por atribuir os valores recebidos como parâmetros e tratar as exceçoes de conexão básicas.
+	 * @param conexao - É o socket, necessário para a conexão em tempo real.
+	 * @param receptor - Responsavel pelo recebimento de dados
+	 * @param transmissor - Responsavel pelo envio de dados
+	 * @throws Exception Caso não seja possivel se conectar com o socket
+	 * @throws Exception Caso não seja possivel se conectar com o receptor
+	 * @throws Exception Caso não seja possivel se conectar com o transmissor
+	*/
     public Parceiro (Socket             conexao,
                      ObjectInputStream  receptor,
                      ObjectOutputStream transmissor)
@@ -32,6 +44,11 @@ public class Parceiro
         this.transmissor = transmissor;
     }
 
+    /**
+	 * Método receba, responsavel por receber e tratar os dados
+	 * @param x - Parâmentro que contém a mensagem de fato
+	 * @throws Exception Caso não seja possivel transmitir os dados
+	*/
     public void receba (Comunicado x) throws Exception
     {
         try
@@ -45,6 +62,10 @@ public class Parceiro
         }
     }
 
+    /**
+	 * Método espie, responsavel por monitorar os dados de Comunicado
+	 * @throws Exception Retorna uma exceção caso não seja possível realizar o monitoramento 
+	*/
     public Comunicado espie () throws Exception
     {
         try
@@ -60,6 +81,10 @@ public class Parceiro
         }
     }
 
+    /**
+	 * Método envie, responsavel pelo envio de dados
+	 * @throws Exception Retorna uma exceção caso não seja possível realizar o envio do comunicado 
+	*/
     public Comunicado envie () throws Exception
     {
         try
@@ -75,6 +100,10 @@ public class Parceiro
         }
     }
 
+    /**
+	 * Método adeus, responsavel por fechar todas as conexões abertas
+	 * @throws Exception Retorna uma exceção caso não seja possível se desconectar
+	*/
     public void adeus () throws Exception
     {
         try
