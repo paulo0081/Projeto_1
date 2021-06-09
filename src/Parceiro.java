@@ -45,8 +45,8 @@ public class Parceiro
     }
 
     /**
-	 * Método receba, responsavel por receber e tratar os dados
-	 * @param x - Parâmentro que contém a mensagem de fato
+	 * Método receba, responsavel por enviar e tratar os dados do labirinto
+	 * @param x - Parâmentro que contém o labirinto de fato
 	 * @throws Exception Caso não seja possivel transmitir os dados
 	*/
     public void receba (Comunicado x) throws Exception
@@ -63,7 +63,7 @@ public class Parceiro
     }
 
     /**
-	 * Método espie, responsavel por monitorar os dados de Comunicado
+	 * Método espie, responsavel por monitorar os dados, garantindo que o nosso programa cliente não receba coisas que não sejam necessárias
 	 * @throws Exception Retorna uma exceção caso não seja possível realizar o monitoramento 
 	*/
     public Comunicado espie () throws Exception
@@ -82,8 +82,8 @@ public class Parceiro
     }
 
     /**
-	 * Método envie, responsavel pelo envio de dados
-	 * @throws Exception Retorna uma exceção caso não seja possível realizar o envio do comunicado 
+	 * Método envie, responsavel pelo recebimento de dados de comunicado
+	 * @throws Exception Retorna uma exceção caso não seja possível receber do comunicado 
 	*/
     public Comunicado envie () throws Exception
     {
