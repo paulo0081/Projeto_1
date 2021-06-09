@@ -2,7 +2,6 @@ import java.sql.Date;
 
 /**
 * Classe PedidoDeSalvar, responsável pelo salvamento do labirinto.
-* @param data - Parâmetro IP, contendo a data do salvamento
 */
 @SuppressWarnings("serial")
 public class PedidoDeSalvar extends Comunicado
